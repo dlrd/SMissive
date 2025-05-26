@@ -62,7 +62,6 @@ function trackPreviousConversation() {
 }
 
 function handleConversationChange() {
-  log("🔄 Detected conversation change");
 
   Missive.fetchConversations({ idsOnly: false }).then(conversations => {
     const selected = conversations.find(c => c.selected);
