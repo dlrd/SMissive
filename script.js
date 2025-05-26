@@ -10,7 +10,7 @@ function log(msg) {
 }
 
 function setStatus(text) {
-  log(`Set status: ${text}`)
+  log("Set status: " + text);
   document.getElementById("status").textContent = text;
 }
 
@@ -62,6 +62,8 @@ function trackPreviousConversation() {
 }
 
 function handleConversationChange() {
+  log("🔄 Detected conversation change");
+
   Missive.fetchConversations({ idsOnly: false }).then(conversations => {
     const selected = conversations.find(c => c.selected);
     if (!selected) {
@@ -97,10 +99,15 @@ window.addEventListener("blur", handleBlur);
 window.addEventListener("focus", handleFocus);
 
 window.Missive = window.Missive || {};
+
+log("⏳ Waiting for Missive...");
+
 Missive.on("ready", () => {
+  log("✅ Missive ready");
+
   setStatus("Missive ready");
   Missive.on("change:conversations", handleConversationChange);
-  handleConversationChange();
+  handleConversationChange(); // Run once on init
 });
 
 log("⏳ Waiting for Missive...");
