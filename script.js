@@ -10,6 +10,7 @@ function log(msg) {
 }
 
 function setStatus(text) {
+  log(`Set status: ${text}`)
   document.getElementById("status").textContent = text;
 }
 
